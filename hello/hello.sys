@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System Name="hello" Comment="">
+	<VersionInfo Version="1.0" Author="alex" Date="2022-07-21">
+	</VersionInfo>
+	<Application Name="helloApp" Comment="">
+		<SubAppNetwork>
+			<FB Name="OUT_ANY_CONSOLE" Type="OUT_ANY_CONSOLE" Comment="" x="6235.294117647059" y="1176.4705882352941">
+				<Parameter Name="QI" Value="1"/>
+				<Parameter Name="LABEL" Value="'Hello'"/>
+			</FB>
+			<FB Name="F_ADD" Type="F_ADD" Comment="" x="4352.941176470588" y="1176.4705882352941">
+			</FB>
+			<FB Name="INT2INT" Type="INT2INT" Comment="" x="3199.9999999999995" y="1076.4705882352941">
+				<Parameter Name="IN" Value="1"/>
+			</FB>
+			<FB Name="INT2INT_1" Type="INT2INT" Comment="" x="3294.1176470588234" y="1882.3529411764705">
+				<Parameter Name="IN" Value="1"/>
+			</FB>
+			<FB Name="INT2INT_2" Type="INT2INT" Comment="" x="5058.823529411764" y="1294.1176470588234">
+			</FB>
+			<EventConnections>
+				<Connection Source="F_ADD.CNF" Destination="INT2INT_2.REQ" Comment="" dx1="123.52941176470587"/>
+				<Connection Source="INT2INT_2.CNF" Destination="OUT_ANY_CONSOLE.REQ" Comment="" dx1="282.35294117647055"/>
+				<Connection Source="INT2INT.CNF" Destination="INT2INT_1.REQ" Comment="" dx1="70.58823529411764" dx2="70.58823529411764" dy="399.99999999999994"/>
+				<Connection Source="INT2INT_1.CNF" Destination="F_ADD.REQ" Comment="" dx1="105.88235294117646"/>
+			</EventConnections>
+			<DataConnections>
+				<Connection Source="INT2INT_2.OUT" Destination="OUT_ANY_CONSOLE.IN" Comment="" dx1="282.35294117647055"/>
+				<Connection Source="F_ADD.OUT" Destination="INT2INT_2.IN" Comment="" dx1="123.52941176470587"/>
+				<Connection Source="INT2INT.OUT" Destination="F_ADD.IN1" Comment="" dx1="152.94117647058823"/>
+				<Connection Source="INT2INT_1.OUT" Destination="F_ADD.IN2" Comment="" dx1="105.88235294117646"/>
+			</DataConnections>
+		</SubAppNetwork>
+	</Application>
+	<Device Name="FORTE_PC" Type="FORTE_PC" Comment="" x="3241.176470588235" y="988.235294117647">
+		<Parameter Name="MGR_ID" Value="&quot;localhost:61499&quot;"/>
+		<Attribute Name="Profile" Type="STRING" Value="HOLOBLOC" Comment="device profile"/>
+		<Attribute Name="Color" Type="STRING" Value="255,190,111" Comment="color"/>
+		<Resource Name="EMB_RES" Type="EMB_RES" Comment="" x="0.0" y="0.0">
+			<FBNetwork>
+				<FB Name="INT2INT" Type="INT2INT" Comment="" x="3199.9999999999995" y="1076.4705882352941">
+					<Parameter Name="IN" Value="1"/>
+				</FB>
+				<FB Name="INT2INT_1" Type="INT2INT" Comment="" x="3294.1176470588234" y="1882.3529411764705">
+					<Parameter Name="IN" Value="1"/>
+				</FB>
+				<FB Name="F_ADD" Type="F_ADD" Comment="" x="4352.941176470588" y="1176.4705882352941">
+				</FB>
+				<FB Name="INT2INT_2" Type="INT2INT" Comment="" x="5058.823529411764" y="1294.1176470588234">
+				</FB>
+				<FB Name="OUT_ANY_CONSOLE" Type="OUT_ANY_CONSOLE" Comment="" x="6235.294117647059" y="1176.4705882352941">
+					<Parameter Name="QI" Value="1"/>
+					<Parameter Name="LABEL" Value="'Hello'"/>
+				</FB>
+				<EventConnections>
+					<Connection Source="INT2INT.CNF" Destination="INT2INT_1.REQ" Comment="" dx1="70.58823529411764" dx2="70.58823529411764" dy="399.99999999999994"/>
+					<Connection Source="INT2INT_1.CNF" Destination="F_ADD.REQ" Comment="" dx1="223.52941176470586"/>
+					<Connection Source="F_ADD.CNF" Destination="INT2INT_2.REQ" Comment="" dx1="94.11764705882352"/>
+					<Connection Source="INT2INT_2.CNF" Destination="OUT_ANY_CONSOLE.REQ" Comment="" dx1="282.35294117647055"/>
+					<Connection Source="START.WARM" Destination="INT2INT.REQ" Comment="" dx1="952.9411764705882"/>
+					<Connection Source="START.COLD" Destination="INT2INT.REQ" Comment="" dx1="952.9411764705882"/>
+				</EventConnections>
+				<DataConnections>
+					<Connection Source="INT2INT.OUT" Destination="F_ADD.IN1" Comment="" dx1="270.5882352941176"/>
+					<Connection Source="INT2INT_1.OUT" Destination="F_ADD.IN2" Comment="" dx1="223.52941176470586"/>
+					<Connection Source="F_ADD.OUT" Destination="INT2INT_2.IN" Comment="" dx1="94.11764705882352"/>
+					<Connection Source="INT2INT_2.OUT" Destination="OUT_ANY_CONSOLE.IN" Comment="" dx1="282.35294117647055"/>
+				</DataConnections>
+			</FBNetwork>
+		</Resource>
+	</Device>
+	<Mapping From="helloApp.INT2INT" To="FORTE_PC.EMB_RES.INT2INT"/>
+	<Mapping From="helloApp.INT2INT_1" To="FORTE_PC.EMB_RES.INT2INT_1"/>
+	<Mapping From="helloApp.F_ADD" To="FORTE_PC.EMB_RES.F_ADD"/>
+	<Mapping From="helloApp.INT2INT_2" To="FORTE_PC.EMB_RES.INT2INT_2"/>
+	<Mapping From="helloApp.OUT_ANY_CONSOLE" To="FORTE_PC.EMB_RES.OUT_ANY_CONSOLE"/>
+	<Segment Name="Ethernet" Type="Ethernet" Comment="" x="3117.6470588235293" y="2335.2941176470586" dx1="1764.705882352941">
+		<Attribute Name="Color" Type="STRING" Value="204,129,179" Comment="color"/>
+	</Segment>
+	<Link SegmentName="Ethernet" CommResource="FORTE_PC" Comment="">
+	</Link>
+</System>
