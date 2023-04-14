@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System Name="simpleAlphabot" Comment="">
+	<VersionInfo Version="1.0" Author="test" Date="2023-01-19">
+	</VersionInfo>
+	<Application Name="simpleAlphabotApp" Comment="">
+		<SubAppNetwork>
+			<FB Name="SUBSCRIBE_1" Type="SUBSCRIBE_1" Comment="" x="300.0" y="1700.0">
+				<Parameter Name="QI" Value="1"/>
+				<Parameter Name="ID" Value="&quot;raw[].mqtt[tcp://127.0.0.1:1883, abot, abto_cmd]&quot;"/>
+			</FB>
+			<FB Name="AB_CMDPARSER" Type="AB_CMDPARSER" Comment="" x="1600.0" y="1800.0">
+			</FB>
+			<FB Name="AB_BACKWORD" Type="AB_BACKWORD" Comment="" x="4200.0" y="3600.0">
+				<Parameter Name="QI" Value="1"/>
+			</FB>
+			<FB Name="AB_FORWARD" Type="AB_FORWARD" Comment="" x="4200.0" y="1200.0">
+				<Parameter Name="QI" Value="1"/>
+			</FB>
+			<FB Name="AB_STOP" Type="AB_STOP" Comment="" x="5100.0" y="1200.0">
+				<Parameter Name="DURATION" Value="0"/>
+			</FB>
+			<FB Name="E_DEMUX" Type="E_DEMUX" Comment="" x="2700.0" y="1400.0">
+			</FB>
+			<FB Name="AB_LEFT" Type="AB_LEFT" Comment="" x="4200.0" y="2000.0">
+				<Parameter Name="QI" Value="1"/>
+			</FB>
+			<FB Name="AB_RIGHT" Type="AB_RIGHT" Comment="" x="4200.0" y="2800.0">
+				<Parameter Name="QI" Value="1"/>
+			</FB>
+			<FB Name="AB_STOP_1" Type="AB_STOP" Comment="" x="5100.0" y="2100.0">
+				<Parameter Name="DURATION" Value="0"/>
+			</FB>
+			<FB Name="AB_STOP_2" Type="AB_STOP" Comment="" x="2500.0" y="3200.0">
+			</FB>
+			<FB Name="F_EQ" Type="F_EQ" Comment="" x="1700.0" y="3100.0">
+			</FB>
+			<FB Name="AB_STOP_3" Type="AB_STOP" Comment="" x="5100.0" y="2900.0">
+				<Parameter Name="DURATION" Value="0"/>
+			</FB>
+			<FB Name="AB_STOP_4" Type="AB_STOP" Comment="" x="5200.0" y="3700.0">
+				<Parameter Name="DURATION" Value="0"/>
+			</FB>
+			<EventConnections>
+				<Connection Source="SUBSCRIBE_1.IND" Destination="AB_CMDPARSER.REQ" Comment=""/>
+				<Connection Source="AB_FORWARD.CNF" Destination="AB_STOP.REQ" Comment=""/>
+				<Connection Source="AB_CMDPARSER.CNF" Destination="F_EQ.REQ" Comment="" dx1="60.0" dx2="60.0" dy="650.0"/>
+				<Connection Source="F_EQ.CNF" Destination="AB_STOP_2.REQ" Comment="" dx1="190.0"/>
+				<Connection Source="AB_CMDPARSER.CNF" Destination="E_DEMUX.EI" Comment="" dx1="265.0"/>
+				<Connection Source="E_DEMUX.EO0" Destination="AB_FORWARD.REQ" Comment="" dx1="325.0"/>
+				<Connection Source="E_DEMUX.EO1" Destination="AB_LEFT.REQ" Comment="" dx1="475.0"/>
+				<Connection Source="E_DEMUX.EO2" Destination="AB_RIGHT.REQ" Comment="" dx1="325.0"/>
+				<Connection Source="AB_BACKWORD.CNF" Destination="AB_STOP_4.REQ" Comment="" dx1="135.0"/>
+				<Connection Source="AB_RIGHT.CNF" Destination="AB_STOP_3.REQ" Comment="" dx1="150.0"/>
+				<Connection Source="AB_LEFT.CNF" Destination="AB_STOP_1.REQ" Comment="" dx1="165.0"/>
+				<Connection Source="E_DEMUX.EO3" Destination="AB_BACKWORD.REQ" Comment="" dx1="475.0"/>
+			</EventConnections>
+			<DataConnections>
+				<Connection Source="SUBSCRIBE_1.QO" Destination="AB_CMDPARSER.QI" Comment=""/>
+				<Connection Source="SUBSCRIBE_1.RD_1" Destination="AB_CMDPARSER.SCMD" Comment="" dx1="485.0"/>
+				<Connection Source="AB_FORWARD.QO" Destination="AB_STOP.QI" Comment=""/>
+				<Connection Source="AB_CMDPARSER.CMD" Destination="F_EQ.IN1" Comment="" dx1="60.0" dx2="60.0" dy="220.0"/>
+				<Connection Source="F_EQ.OUT" Destination="AB_STOP_2.QI" Comment="" dx1="190.0"/>
+				<Connection Source="AB_CMDPARSER.CMD" Destination="E_DEMUX.K" Comment="" dx1="265.0"/>
+				<Connection Source="AB_CMDPARSER.DURATION" Destination="AB_FORWARD.DURATION" Comment="" dx1="910.0"/>
+				<Connection Source="AB_CMDPARSER.DURATION" Destination="AB_LEFT.DURATION" Comment="" dx1="910.0"/>
+				<Connection Source="AB_CMDPARSER.DURATION" Destination="AB_RIGHT.DURATION" Comment="" dx1="910.0"/>
+				<Connection Source="AB_CMDPARSER.DURATION" Destination="AB_BACKWORD.DURATION" Comment="" dx1="910.0"/>
+				<Connection Source="AB_BACKWORD.QO" Destination="AB_STOP_4.QI" Comment="" dx1="135.0"/>
+				<Connection Source="AB_RIGHT.QO" Destination="AB_STOP_3.QI" Comment="" dx1="150.0"/>
+				<Connection Source="AB_LEFT.QO" Destination="AB_STOP_1.QI" Comment="" dx1="165.0"/>
+			</DataConnections>
+		</SubAppNetwork>
+	</Application>
+</System>
