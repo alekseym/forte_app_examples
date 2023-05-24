@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<System Name="separatedAlphabot" Comment="">
+	<VersionInfo Version="1.0" Author="test" Date="2023-01-19">
+	</VersionInfo>
+	<Application Name="separatedAlphabot" Comment="">
+		<SubAppNetwork>
+			<FB Name="AB_BACKWORD" Type="AB_BACKWORD" Comment="" x="4200.0" y="3600.0">
+				<Parameter Name="QI" Value="1"/>
+			</FB>
+			<FB Name="AB_FORWARD" Type="AB_FORWARD" Comment="" x="4200.0" y="1200.0">
+				<Parameter Name="QI" Value="1"/>
+			</FB>
+			<FB Name="AB_STOP" Type="AB_STOP" Comment="" x="5100.0" y="1200.0">
+				<Parameter Name="DURATION" Value="0"/>
+			</FB>
+			<FB Name="E_DEMUX" Type="E_DEMUX" Comment="" x="2700.0" y="1400.0">
+			</FB>
+			<FB Name="AB_LEFT" Type="AB_LEFT" Comment="" x="4200.0" y="2000.0">
+				<Parameter Name="QI" Value="1"/>
+			</FB>
+			<FB Name="AB_RIGHT" Type="AB_RIGHT" Comment="" x="4200.0" y="2800.0">
+				<Parameter Name="QI" Value="1"/>
+			</FB>
+			<FB Name="AB_STOP_1" Type="AB_STOP" Comment="" x="5100.0" y="2100.0">
+				<Parameter Name="DURATION" Value="0"/>
+			</FB>
+			<FB Name="AB_STOP_3" Type="AB_STOP" Comment="" x="5100.0" y="2900.0">
+				<Parameter Name="DURATION" Value="0"/>
+			</FB>
+			<FB Name="AB_STOP_4" Type="AB_STOP" Comment="" x="5200.0" y="3700.0">
+				<Parameter Name="DURATION" Value="0"/>
+			</FB>
+			<FB Name="AB_KOSCMD_RECEIVER" Type="AB_KOSCMD_RECEIVER" Comment="" x="200.0" y="1700.0">
+			</FB>
+			<FB Name="UINT2UINT" Type="UINT2UINT" Comment="" x="1700.0" y="1800.0">
+			</FB>
+			<EventConnections>
+				<Connection Source="AB_FORWARD.CNF" Destination="AB_STOP.REQ" Comment=""/>
+				<Connection Source="E_DEMUX.EO0" Destination="AB_FORWARD.REQ" Comment="" dx1="325.0"/>
+				<Connection Source="E_DEMUX.EO1" Destination="AB_LEFT.REQ" Comment="" dx1="475.0"/>
+				<Connection Source="E_DEMUX.EO2" Destination="AB_RIGHT.REQ" Comment="" dx1="325.0"/>
+				<Connection Source="AB_BACKWORD.CNF" Destination="AB_STOP_4.REQ" Comment="" dx1="135.0"/>
+				<Connection Source="AB_RIGHT.CNF" Destination="AB_STOP_3.REQ" Comment="" dx1="150.0"/>
+				<Connection Source="AB_LEFT.CNF" Destination="AB_STOP_1.REQ" Comment="" dx1="165.0"/>
+				<Connection Source="E_DEMUX.EO3" Destination="AB_BACKWORD.REQ" Comment="" dx1="475.0"/>
+				<Connection Source="AB_KOSCMD_RECEIVER.CNF" Destination="UINT2UINT.REQ" Comment="" dx1="225.0"/>
+				<Connection Source="UINT2UINT.CNF" Destination="E_DEMUX.EI" Comment="" dx1="180.0"/>
+				<Connection Source="AB_KOSCMD_RECEIVER.CNF" Destination="AB_KOSCMD_RECEIVER.REQ" Comment="" dx1="60.0" dx2="60.0" dy="120.0"/>
+			</EventConnections>
+			<DataConnections>
+				<Connection Source="AB_FORWARD.QO" Destination="AB_STOP.QI" Comment=""/>
+				<Connection Source="AB_BACKWORD.QO" Destination="AB_STOP_4.QI" Comment="" dx1="135.0"/>
+				<Connection Source="AB_RIGHT.QO" Destination="AB_STOP_3.QI" Comment="" dx1="150.0"/>
+				<Connection Source="AB_LEFT.QO" Destination="AB_STOP_1.QI" Comment="" dx1="165.0"/>
+				<Connection Source="AB_KOSCMD_RECEIVER.CMD" Destination="UINT2UINT.IN" Comment=""/>
+				<Connection Source="UINT2UINT.OUT" Destination="E_DEMUX.K" Comment="" dx1="180.0"/>
+			</DataConnections>
+		</SubAppNetwork>
+	</Application>
+	<Device Name="FORTE_PC" Type="FORTE_PC" Comment="" x="2530.0" y="675.0">
+		<Parameter Name="MGR_ID" Value="&quot;localhost:61499&quot;"/>
+		<Attribute Name="Profile" Type="STRING" Value="HOLOBLOC" Comment="device profile"/>
+		<Attribute Name="Color" Type="STRING" Value="255,190,111" Comment="color"/>
+		<Resource Name="EMB_RES" Type="EMB_RES" Comment="" x="0.0" y="0.0">
+			<FBNetwork>
+				<FB Name="E_DEMUX" Type="E_DEMUX" Comment="" x="2700.0" y="1400.0">
+				</FB>
+				<FB Name="AB_FORWARD" Type="AB_FORWARD" Comment="" x="4200.0" y="1200.0">
+					<Parameter Name="QI" Value="1"/>
+				</FB>
+				<FB Name="AB_STOP" Type="AB_STOP" Comment="" x="5100.0" y="1200.0">
+					<Parameter Name="DURATION" Value="0"/>
+				</FB>
+				<FB Name="AB_LEFT" Type="AB_LEFT" Comment="" x="4200.0" y="2000.0">
+					<Parameter Name="QI" Value="1"/>
+				</FB>
+				<FB Name="AB_STOP_1" Type="AB_STOP" Comment="" x="5100.0" y="2100.0">
+					<Parameter Name="DURATION" Value="0"/>
+				</FB>
+				<FB Name="AB_RIGHT" Type="AB_RIGHT" Comment="" x="4200.0" y="2800.0">
+					<Parameter Name="QI" Value="1"/>
+				</FB>
+				<FB Name="AB_STOP_3" Type="AB_STOP" Comment="" x="5100.0" y="2900.0">
+					<Parameter Name="DURATION" Value="0"/>
+				</FB>
+				<FB Name="AB_BACKWORD" Type="AB_BACKWORD" Comment="" x="4200.0" y="3600.0">
+					<Parameter Name="QI" Value="1"/>
+				</FB>
+				<FB Name="AB_STOP_4" Type="AB_STOP" Comment="" x="5200.0" y="3700.0">
+					<Parameter Name="DURATION" Value="0"/>
+				</FB>
+				<FB Name="UINT2UINT" Type="UINT2UINT" Comment="" x="1700.0" y="1800.0">
+				</FB>
+				<FB Name="AB_KOSCMD_RECEIVER" Type="AB_KOSCMD_RECEIVER" Comment="" x="200.0" y="1700.0">
+				</FB>
+				<EventConnections>
+					<Connection Source="E_DEMUX.EO0" Destination="AB_FORWARD.REQ" Comment="" dx1="475.0"/>
+					<Connection Source="AB_FORWARD.CNF" Destination="AB_STOP.REQ" Comment=""/>
+					<Connection Source="E_DEMUX.EO1" Destination="AB_LEFT.REQ" Comment="" dx1="475.0"/>
+					<Connection Source="AB_LEFT.CNF" Destination="AB_STOP_1.REQ" Comment="" dx1="165.0"/>
+					<Connection Source="E_DEMUX.EO2" Destination="AB_RIGHT.REQ" Comment="" dx1="475.0"/>
+					<Connection Source="AB_RIGHT.CNF" Destination="AB_STOP_3.REQ" Comment="" dx1="150.0"/>
+					<Connection Source="E_DEMUX.EO3" Destination="AB_BACKWORD.REQ" Comment="" dx1="475.0"/>
+					<Connection Source="AB_BACKWORD.CNF" Destination="AB_STOP_4.REQ" Comment="" dx1="135.0"/>
+					<Connection Source="UINT2UINT.CNF" Destination="E_DEMUX.EI" Comment="" dx1="180.0"/>
+					<Connection Source="AB_KOSCMD_RECEIVER.CNF" Destination="AB_KOSCMD_RECEIVER.REQ" Comment="" dx1="60.0" dx2="60.0" dy="120.0"/>
+					<Connection Source="AB_KOSCMD_RECEIVER.CNF" Destination="UINT2UINT.REQ" Comment="" dx1="225.0"/>
+					<Connection Source="START.WARM" Destination="AB_KOSCMD_RECEIVER.REQ" Comment="" dx1="60.0" dx2="60.0" dy="800.0"/>
+					<Connection Source="START.COLD" Destination="AB_KOSCMD_RECEIVER.REQ" Comment="" dx1="60.0" dx2="60.0" dy="850.0"/>
+				</EventConnections>
+				<DataConnections>
+					<Connection Source="AB_FORWARD.QO" Destination="AB_STOP.QI" Comment=""/>
+					<Connection Source="AB_LEFT.QO" Destination="AB_STOP_1.QI" Comment="" dx1="165.0"/>
+					<Connection Source="AB_RIGHT.QO" Destination="AB_STOP_3.QI" Comment="" dx1="150.0"/>
+					<Connection Source="AB_BACKWORD.QO" Destination="AB_STOP_4.QI" Comment="" dx1="135.0"/>
+					<Connection Source="UINT2UINT.OUT" Destination="E_DEMUX.K" Comment="" dx1="180.0"/>
+					<Connection Source="AB_KOSCMD_RECEIVER.CMD" Destination="UINT2UINT.IN" Comment=""/>
+				</DataConnections>
+			</FBNetwork>
+		</Resource>
+	</Device>
+	<Mapping From="separatedAlphabot.E_DEMUX" To="FORTE_PC.EMB_RES.E_DEMUX"/>
+	<Mapping From="separatedAlphabot.AB_FORWARD" To="FORTE_PC.EMB_RES.AB_FORWARD"/>
+	<Mapping From="separatedAlphabot.AB_STOP" To="FORTE_PC.EMB_RES.AB_STOP"/>
+	<Mapping From="separatedAlphabot.AB_LEFT" To="FORTE_PC.EMB_RES.AB_LEFT"/>
+	<Mapping From="separatedAlphabot.AB_STOP_1" To="FORTE_PC.EMB_RES.AB_STOP_1"/>
+	<Mapping From="separatedAlphabot.AB_RIGHT" To="FORTE_PC.EMB_RES.AB_RIGHT"/>
+	<Mapping From="separatedAlphabot.AB_STOP_3" To="FORTE_PC.EMB_RES.AB_STOP_3"/>
+	<Mapping From="separatedAlphabot.AB_BACKWORD" To="FORTE_PC.EMB_RES.AB_BACKWORD"/>
+	<Mapping From="separatedAlphabot.AB_STOP_4" To="FORTE_PC.EMB_RES.AB_STOP_4"/>
+	<Mapping From="separatedAlphabot.UINT2UINT" To="FORTE_PC.EMB_RES.UINT2UINT"/>
+	<Mapping From="separatedAlphabot.AB_KOSCMD_RECEIVER" To="FORTE_PC.EMB_RES.AB_KOSCMD_RECEIVER"/>
+	<Segment Name="Ethernet" Type="Ethernet" Comment="" x="2325.0" y="1930.0" dx1="1500.0">
+		<Attribute Name="Color" Type="STRING" Value="225,113,128" Comment="color"/>
+	</Segment>
+	<Link SegmentName="Ethernet" CommResource="FORTE_PC" Comment="">
+	</Link>
+</System>
